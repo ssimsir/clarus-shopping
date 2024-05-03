@@ -1,8 +1,7 @@
-import { ADD_TO_BASKET, REMOVE_FROM_BASKET } from "../action/basketAction";
-import { basketItems } from "../type/basketType";
+import { ADD_TO_BASKET, REMOVE_FROM_BASKET } from "../type/basketType"
 
 const initialState = {
-   basketItems: [{ quantity: 1, product: { productName: "Çubuk kraker" } }]
+   basketItems: []
 }
 
 export default function basketReducer(state = initialState, { type, payload }) {
@@ -23,7 +22,7 @@ export default function basketReducer(state = initialState, { type, payload }) {
       case REMOVE_FROM_BASKET:
          return {
             ...state,
-            basketItems: state.basketItems.filer(c => c.product.id !== payload.id)
+            basketItems: state.basketItems?.filer(c => c.product.id !== payload.id)
          }
       default:
          return state;

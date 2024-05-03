@@ -14,6 +14,9 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { ImageList, ImageListItem } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { addToBasket } from "../redux/action/basketAction";
+import { toast } from "react-toastify";
 
 const ExpandMore = styled((props) => {
 	const { expand, ...other } = props;
@@ -47,6 +50,12 @@ export default function ProductCard({ product }) {
 		images,
 	} = product;
 
+	const dispatch = useDispatch();
+
+	const handleAddToBasket = () => {
+		dispatch(addToBasket(product))
+		toast.success(` ${product.title} added to basket`)
+	}
 	return (
 		<Card sx={{ maxWidth: 345 }}>
 			<CardHeader
@@ -75,8 +84,8 @@ export default function ProductCard({ product }) {
 			</CardContent>
 			<CardActions disableSpacing>
 
-				<IconButton aria-label="add to shopping cart">
-					<AddShoppingCartIcon />
+				<IconButton aria-label="add to shopping cart" onClick={()=> handleAddToBasket()}>
+					<AddShoppingCartIcon  />
 				</IconButton>
 				<ExpandMore
 					expand={expanded}
